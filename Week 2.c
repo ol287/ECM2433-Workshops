@@ -5,7 +5,8 @@ function to set its value. Hint: think about what you must #include.
 #include <string.h>
 
 int main() {
-    char str[100]; // Declaring a string variable with enough space for 100 characters
+    //define an array of charaters of size 100
+    char str[100]; 
 
     // Using strcpy to set the value of the string
     strcpy(str, "Hello, World!");
@@ -24,6 +25,8 @@ it works.
 #include <string.h>
 
 // Function prototype
+//returns an int
+// takes a pointer to a char which is constant (cant be modified)
 int checkString(const char *str);
 
 int main() {
@@ -62,6 +65,7 @@ out the values in the array, like this:
 #include <stdio.h>
 
 int main() {
+    //size of array is 11
     int numbers[11]; // Array to hold numbers 10 to 20, inclusive
 
     // Initialize the array with values from 10 to 20
@@ -87,9 +91,11 @@ that you get the same sequence of random numbers each time
 #include <time.h>
 
 int main() {
+    //size of array is 11
     int numbers[11]; // Array to hold random numbers
 
     // Seed the random number generator with the current time
+    //rand() will produce the same sequence of numbers over multiple function calls
     srand(time(NULL));
 
     // Populate the array with random numbers in the range 0 to 9
@@ -116,7 +122,9 @@ random numbers.
 #include <time.h>
 
 int main() {
+    //value cant be overiden
     const int array_size = 1000;
+    //array is initalised with size 100
     double numbers[array_size];
 
     // Create a GSL random number generator
@@ -192,6 +200,7 @@ void histogram(int array[], int size) {
 
 int main() {
     int numbers[] = {1, 2, 3, 2, 4, 5, 3, 3, 4, 4, 9, 6, 6, 7, 8, 9, 4, 5, 9, 0};
+    //width / heigh of histogram
     int array_size = sizeof(numbers) / sizeof(numbers[0]);
 
     // Call the histogram function
