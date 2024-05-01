@@ -28,19 +28,23 @@ int main(int argc, char *argv[]) {
     // Open the file
     //* is a pointer to the file
     FILE *file = fopen(argv[1], "r");
+    //check if the file exisits by seeing if the pointer has an assinged value
     if (file == NULL) {
         printf("The file specified does not exist.\n");
         return 1;
     }
-
+    //int = 4 bytes
+    //char = 1 byte
     int sum1 = 0, sum2 = 0, num1, num2;
     char comma;
     int result;
+    //fscanf reads an input and writes it to the file
     while ((result = fscanf(file, "%d%c%d", &num1, &comma, &num2)) != EOF) {
         //EOF means end of file
         if (result != 3 || comma != ',') {
             //should be 3 values on the line: 2 intergers and one comma
             printf("The file does not have the expected format.\n");
+            //must always close a file
             fclose(file);
             return 1;
         }
@@ -49,6 +53,7 @@ int main(int argc, char *argv[]) {
     }
 
     // Check if the file is empty
+    //feof(file), checks if the file pointer has reached the end of the file
     if (feof(file) && sum1 == 0 && sum2 == 0) {
         printf("The file is empty.\n");
         fclose(file);
