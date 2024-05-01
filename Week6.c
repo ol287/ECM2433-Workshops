@@ -5,10 +5,13 @@
 #include <time.h>
 
 //preprocessor macros that define indices used to access the read and write ends of a pipe, respectively.
+//define macros for subsitution
 #define READ_END 0
 #define WRITE_END 1
 
 //funciton defintions
+// both functions return nothing
+// both functions take an array of intergers
 void parent_process(int pipe_fd[]);
 void child_process(int pipe_fd[]);
 
@@ -17,12 +20,14 @@ int main() {
     int pipe_fd[2];
 
     //checks if the pipe creation failed
+    
     if (pipe(pipe_fd) == -1) {
         perror("Pipe creation failed");
         exit(EXIT_FAILURE);
     }
 
     //Forking the process to create a child process.
+    //fork function will return the childprocess id
     pid_t pid = fork();
 
     //checks if the fork failed
@@ -31,6 +36,7 @@ int main() {
         exit(EXIT_FAILURE);
     } else if (pid > 0) {
         // Parent process
+        //sends the chlid process id to the oarent
         parent_process(pipe_fd);
     } else {
         // Child process
