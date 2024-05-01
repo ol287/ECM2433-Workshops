@@ -3,12 +3,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//int argc - argument count, the number of command line arguments
+// char **argv -  represents an array of strings (char *) which are the actual arguments passed to the program.
 int main(int argc, char **argv) {
     int i;
+    //prints every argyment
     for (i = 0; i < argc; i++)
         printf("Parameter %d: %s\n", i, argv[i]);
 
     if (argc > 1) {
+        //atoi function is ascii to interger
         int value = atoi(argv[1]);
         if (value == 0 && argv[1][0] != '0') {
             printf("The first parameter '%s' is not a valid integer.\n", argv[1]);
@@ -39,8 +43,11 @@ int main(){
     int x = 4;
     printf("Value of x: %d\n", x);
     printf("Memory address of x: %p\n", (void*)&x);
+    //delares a pointer that will point to an interger
     int *xPtr;
+    // now points the memory address of where x is stored
     xPtr = &x;
+    //overwrites the memory address to now 6
     *xPtr = 6;
     printf("New value of x using xPtr: %d\n", *xPtr);
     printf("Memory address of xPtr: %p\n", (void*)&xPtr);
@@ -63,6 +70,8 @@ prints out its value
 #include <stdio.h>
 
 // Function prototype declaration
+// takes an int as a parameter
+// returns an interger
 int printInteger(int);
 
 int main() {
@@ -96,13 +105,17 @@ int printInteger(int num) {
 
 #include <stdio.h>
 
+//function reutrns noting
+// takes a pointer as an argument that points to an interger
 void updateInteger(int *ptr) {
+    // contents of memory location is incremented by 3
     *ptr += 3;
 }
 
 int main() {
     int x = 42;
     printf("in main function x = %d\n", x);
+    // mmeory address of x is passed to the function (reference)
     updateInteger(&x);
     printf("in main function x = %d\n", x);
 
@@ -121,25 +134,31 @@ free the memory before your program closes.
 #include <stdlib.h>
 
 int main(int argc, char *argv[]) {
+    //if argument count is not equal to 2
     if (argc != 2) {
         printf("Usage: %s <size_of_array>\n", argv[0]);
         return 1;
     }
-
+    // size is assigned after converitng the cl argument from Ascii to an int
     int size = atoi(argv[1]); // Convert the command line argument to an integer
 
+    //if size is negative or zero
     if (size <= 0) {
         printf("Please enter a positive integer as the size of the array.\n");
         return 1;
     }
-
+    //malloc used to allocate memory
+    //*arr is a pointer to the memory allocated
+    // each element in the arr is represented by a short int
+    //total size in memory of arr needs to be size (num of elements) * sizeof(short int)
     short int *arr = (short int *)malloc(size * sizeof(short int));
+
 
     if (arr == NULL) {
         printf("Memory allocation failed.\n");
         return 1;
     }
-
+    
     int i;
     for (i = 0; i < size; i++) {
         arr[i] = i + 1;
